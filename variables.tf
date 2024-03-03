@@ -1,7 +1,7 @@
 variable "record_ips" {
    type =  object({
      name = string
-     ips = list(map({
+     ips = list(object({
        ip = string
        port = string
      }

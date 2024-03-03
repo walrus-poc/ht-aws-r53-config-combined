@@ -1,14 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.16"
-    }
-  }
-
-  required_version = ">= 1.2.0"
-}
-
 locals {
   name = var.record_ips.name
   ips = toset([for i in var.record_ips.ips: i.ip ])
