@@ -15,7 +15,7 @@ resource "aws_scheduler_schedule" "this" {
 
   target {
     arn      = var.lambda_arn
-    role_arn = aws_iam_role.iam_for_dns_eventbridge.arn
+    role_arn = var.eventbridge_arn
 
     input = jsonencode({
       IP_ADDR = each.value.ip
@@ -23,4 +23,3 @@ resource "aws_scheduler_schedule" "this" {
     })
   }
 }
-
