@@ -1,0 +1,4 @@
+
+variable "record_ips" {
+
+}
