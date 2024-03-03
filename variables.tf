@@ -6,13 +6,13 @@ variable "record_ips" {
    )
 }
 
+
+
 variable "ip_ports" {
-   type = list(object({
+   type = list(
+    object({
       ip  = string
       port = string
-      value_refer = optional(object({
-        schema = string
-        params = map(any)
-      }))
-    }))
+    })
+  )
 }
