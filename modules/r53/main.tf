@@ -9,7 +9,7 @@ data "aws_route53_zone" "private" {
 
 resource "aws_route53_record" "this" {
   for_each  = local.ips
-  zone_id = aws_route53_zone.private.zone_id
+  zone_id = data.aws_route53_zone.private.zone_id
   name    = local.name
   type    = "A"
   ttl     = 60
