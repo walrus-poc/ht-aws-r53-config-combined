@@ -16,7 +16,6 @@ variable "record_ips" {
 
 variable "enabled" {
   description = "Flag to enable or disable the sending of emails"
-  type        = bool
   default     = "true"
 }
 
