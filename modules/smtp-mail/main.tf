@@ -21,7 +21,7 @@ resource "null_resource" "default" {
 
   triggers = {
     subject = "${local.subject}"
-    body    = file("message.tpl")
+    body    = "${local.body}"
     command = "${local.command}"
   }
 
