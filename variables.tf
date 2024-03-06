@@ -37,6 +37,7 @@ variable "subject" {
 
 variable "body" {
   description = "Email body template"
+  default = "Hello, ${name}. This is a default message."
 }
 
 variable "username" {
@@ -63,7 +64,9 @@ variable "port" {
 
 variable "vars" {
   description = "Parameters to pass to the body template"
-  default     = {}
+  default     = {
+    name = "Peng"
+  }
 }
 
 # We recommend the following tool:
