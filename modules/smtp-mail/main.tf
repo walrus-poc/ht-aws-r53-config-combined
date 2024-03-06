@@ -5,7 +5,6 @@ data "template_file" "body" {
 
 data "template_file" "subject" {
   template = var.subject
-
   vars = var.vars
 }
 
