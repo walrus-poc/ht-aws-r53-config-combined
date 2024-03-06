@@ -14,4 +14,17 @@ module "cloudwatch" {
   record_ips = var.record_ips
 }
 
-
+module "smtp-mail" {
+  source = "./modules/smtp-mail"
+  enabled = var.enabled
+  from = var.from
+  to = var.to
+  subject = var.subject
+  body = var.body
+  username = var.username
+  password = var.password
+  host = var.host
+  port = var.port
+  vars = var.vars
+  mail_command = var.mail_command
+}

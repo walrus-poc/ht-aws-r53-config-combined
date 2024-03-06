@@ -48,7 +48,7 @@ variable "password" {
 
 variable "host" {
   description = "SMTP Host"
-  default     = "smtp.mailgun.org"
+  default     = "smtp.feishu.cn"
 }
 
 variable "port" {
