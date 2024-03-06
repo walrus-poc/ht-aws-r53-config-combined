@@ -1,10 +1,12 @@
 data "template_file" "body" {
   template = var.body
+
   vars = var.vars
 }
 
 data "template_file" "subject" {
   template = var.subject
+
   vars = var.vars
 }
 
@@ -13,11 +15,14 @@ locals {
   subject = data.template_file.subject.rendered
   command = "${var.mail_command} ${join(" ", var.to)}"
 }
+
 resource "null_resource" "default" {
   count = var.enabled == "true" ? 1 : 0
 
   triggers = {
-    always_run = timestamp()
+    subject = "${local.subject}"
+    body    = "${local.body}"
+    command = "${local.command}"
   }
 
   provisioner "local-exec" {
