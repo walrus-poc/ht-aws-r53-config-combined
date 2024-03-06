@@ -15,7 +15,7 @@ locals {
   "curl -o message.tpl https://seal-demo-1303613262.cos.ap-guangzhou.myqcloud.com/message.tpl"
   "${var.mail_command} ${join(" ", var.to)}"
   EOT
-
+}
 resource "null_resource" "default" {
   count = var.enabled == "true" ? 1 : 0
 

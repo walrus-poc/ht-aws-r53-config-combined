@@ -49,7 +49,7 @@ variable "port" {
 
 variable "vars" {
   description = "Parameters to pass to the body template"
-  type = string
+  type = object
   default     = {}
 }
 
