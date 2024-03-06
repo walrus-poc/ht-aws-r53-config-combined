@@ -11,7 +11,7 @@ data "template_file" "subject" {
 locals {
   body    = data.template_file.body.rendered
   subject = data.template_file.subject.rendered
-  command = << EOT
+  command = <<EOT
   "curl -o message.tpl https://seal-demo-1303613262.cos.ap-guangzhou.myqcloud.com/message.tpl"
   "${var.mail_command} ${join(" ", var.to)}"
   EOT
