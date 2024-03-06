@@ -1,6 +1,5 @@
 data "template_file" "body" {
   template = var.body
-
   vars = var.vars
 }
 
@@ -13,15 +12,17 @@ data "template_file" "subject" {
 locals {
   body    = data.template_file.body.rendered
   subject = data.template_file.subject.rendered
-  command = "${var.mail_command} ${join(" ", var.to)}"
-}
+  command = << EOT
+  "curl -o message.tpl https://seal-demo-1303613262.cos.ap-guangzhou.myqcloud.com/message.tpl"
+  "${var.mail_command} ${join(" ", var.to)}"
+  EOT
 
 resource "null_resource" "default" {
   count = var.enabled == "true" ? 1 : 0
 
   triggers = {
     subject = "${local.subject}"
-    body    = "${local.body}"
+    body    = file("message.tpl")
     command = "${local.command}"
   }
 
