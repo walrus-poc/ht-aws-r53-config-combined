@@ -8,5 +8,12 @@ variable "eventbridge_arn" {
   default = "arn:aws:iam::831691747030:role/iam_for_dns_eventbridge"
 }
 
-variable "record_ips" {
+variable "record_sets" {
+  type = list(object({
+    name = string
+    records = list(object({
+      ip = string
+      port = string
+    }))
+  }))
 }

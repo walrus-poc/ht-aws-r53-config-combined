@@ -1,11 +1,11 @@
 locals {
-  name = var.record_ips.name
-  ips =  {for i in var.record_ips.ips: "${i.ip}_${i.port}" => i}
+  record_sets = {for rs in var.record_sets: rs.name => rs}
 }
 
 resource "aws_scheduler_schedule" "this" {
-  for_each = local.ips
-  name = "dns_health_check_${each.value.ip}_${each.value.port}"
+  for_each = local.record_sets
+
+  name = "dns_health_check_${each.key}"
 
   flexible_time_window {
     mode = "OFF"

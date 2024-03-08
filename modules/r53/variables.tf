@@ -1,15 +1,13 @@
 variable "route53_zone_name" {
-    type = string
+  type = string
 }
 
-variable "record_ips" {
-   type =  object({
-     name = string
-     ips = list(object({
-       ip = string
-       port = string
-     }
-    ))
-   }
-   )
+variable "record_sets" {
+  type = list(object({
+    name = string
+    records = list(object({
+      ip = string
+      port = string
+    }))
+  }))
 }

@@ -1,11 +1,11 @@
 locals {
-  name = var.record_ips.name
-  ips =  {for i in var.record_ips.ips: "${i.ip}_${i.port}" => i}
+  record_sets = {for rs in var.record_sets: rs.name => rs}
 }
 
 resource "aws_cloudwatch_metric_alarm" "this" {
-  for_each = local.ips
-  alarm_name                = "dns_alarm_${each.value.ip}_${each.value.port}"
+  for_each = local.record_sets
+
+  alarm_name                = "dns_alarm_${each.key}"
   comparison_operator       = "LessThanThreshold"
   evaluation_periods        = 2
   metric_name               = "HealthStatus"
