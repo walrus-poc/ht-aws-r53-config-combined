@@ -1,9 +1,18 @@
 locals {
   record_sets = {for rs in var.record_sets: rs.name => rs}
+  records = flatten([
+    for rs in var.record_sets : [
+      for record in rs.records : {
+        name = rs.name
+        ip = record.ip
+        port = record.port
+      }
+    ]
+  ])
 }
 
 resource "aws_cloudwatch_metric_alarm" "this" {
-  for_each = local.record_sets
+  for_each = {for r in local.records : "${r.name}_${r.ip}_${r.port}" => r}
 
   alarm_name                = "dns_alarm_${each.key}"
   comparison_operator       = "LessThanThreshold"
